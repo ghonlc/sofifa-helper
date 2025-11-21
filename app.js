@@ -9,6 +9,14 @@ const positionResult = document.getElementById("position-result");
 // Stats que vamos a buscar
 const STAT_KEYS = ["PAC", "SHO", "PAS", "DRI", "DEF", "PHY"];
 
+const STAT_LABELS = {
+  PAC: "RIT (Ritmo)",
+  SHO: "TIR (Tiro)",
+  PAS: "PAS (Pase)",
+  DRI: "REG (Regate)",
+  DEF: "DEF (Defensa)",
+  PHY: "FIS (Físico)"
+};
 // Función auxiliar para mostrar stats en pantalla
 function renderStats(stats) {
   statsGrid.innerHTML = "";
@@ -16,11 +24,11 @@ function renderStats(stats) {
     const div = document.createElement("div");
     div.className = "stat-box";
     const value = stats[key] ?? "-";
-    div.innerHTML = `<span>${key}</span><span class="value">${value}</span>`;
+    const label = STAT_LABELS[key] || key;
+    div.innerHTML = `<span>${label}</span><span class="value">${value}</span>`;
     statsGrid.appendChild(div);
   });
 }
-
 // Lógica de cálculo de "mejor posición"
 function calculateBestPosition(stats) {
   const pac = stats.PAC ?? 50;
