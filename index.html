@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sofifa Helper – Proyección jugador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #0b1020;
+      color: #f5f5f5;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .card {
+      background: #151a30;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      margin-bottom: 16px;
+    }
+    label {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input[type="file"] {
+      display: block;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    button.primary {
+      background: #1dd75b;
+      color: #05110b;
+    }
+    button.secondary {
+      background: #273151;
+      color: #f5f5f5;
+    }
+    .small {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    #ocr-status {
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #0f1323;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .stat-box {
+      background: #0f1323;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+    .stat-box span.value {
+      font-weight: 700;
+      float: right;
+    }
+    .result-main {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .result-detail {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sofifa Helper</h1>
+  <p class="small">Sube una captura de los stats del jugador para estimar su mejor posición.</p>
+
+  <div class="card">
+    <label for="image-input">📸 Captura / foto de la pantalla</label>
+    <input id="image-input" type="file" accept="image/*" capture="environment" />
+    <button class="primary" id="analyze-btn">Analizar imagen</button>
+    <button class="secondary" id="demo-btn">Probar con datos de ejemplo</button>
+    <div id="ocr-status"></div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:1rem;margin-top:0;">Texto detectado (OCR)</h2>
+    <pre id="ocr-text">Aún no se ha procesado ninguna imagen.</pre>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:1rem;margin-top:0;">Stats detectados</h2>
+    <div class="stats-grid" id="stats-grid">
+      <!-- Se llenará por JS -->
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:1rem;margin-top:0;">Proyección de posición</h2>
+    <div id="position-result">
+      Aún no se calcula ninguna proyección.
+    </div>
+  </div>
+
+  <!-- Tesseract.js desde CDN -->
+  <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
